@@ -1,0 +1,5 @@
+To build your project with custom homepage, following this command
+
+set PUBLIC_URL=http://your_domain/&&npm run build
+
+set PUBLIC_URL=http://103.92.25.253:82/testweb/&&npm run build

@@ -1,0 +1,251 @@
+@import '~antd/dist/antd.css';
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.banner {
+  position: relative;
+  display: flex;
+  width: 370px;
+  height: 50px;
+  padding: 0 20px;
+  border: 1px solid #d5d5d5;
+  border-radius: 5px;
+  justify-content: flex-start;
+  align-items: center;
+}
+.banner:hover {
+  border-color: #ad8732;
+}
+.banner .logo {
+  height: 40px;
+  margin-right: 10px;
+}
+.banner .text {
+  color: #505050;
+  font-size: 14px;
+}
+.banner .icon {
+  position: absolute;
+  height: 12px;
+  top: 3px;
+  right: 5px;
+}
+.banner .icon.country {
+  box-shadow: 1px 2px 1px #b2b2b2;
+}
+@media (max-width: 850px) {
+  .banner {
+    width: 100%;
+  }
+}
+.groups {
+  max-width: 840px;
+  margin: 0 auto 60px;
+}
+.groups .group {
+  display: flex;
+  flex-flow: wrap;
+  margin-top: 60px;
+}
+.groups .group .title {
+  width: 100%;
+  line-height: 1;
+  font-size: 18px;
+}
+.groups .group .banner {
+  margin-right: 24px;
+  margin-top: 24px;
+}
+@media (max-width: 850px) {
+  .groups {
+    max-width: 640px;
+    padding: 0 12px;
+    margin-bottom: 36px;
+  }
+  .groups .group {
+    margin-top: 30px;
+  }
+  .groups .group .title {
+    font-size: 16px;
+    line-height: 30px;
+  }
+  .groups .group .banner {
+    margin-right: 0;
+    margin-top: 12px;
+  }
+}
+.order .payment-type {
+  background-color: #f4f4f4;
+  font-size: 24px;
+  text-align: center;
+  line-height: 56px;
+  color: #454545;
+}
+.order .order-form {
+  max-width: 820px;
+  margin: 60px auto 60px;
+}
+.order .order-form > p,
+.order .order-form label {
+  font-size: 16px;
+}
+.order .order-form .ant-form-item,
+.order .order-form .order-character-id {
+  max-width: 592px;
+}
+.order .order-form .order-character-id {
+  position: relative;
+}
+.order .order-form .cid-tip {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAAAe1BMVEUAAACcnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpycnpzH4tNMAAAAKHRSTlMA2fjlFN8dw6b004ZpYCUOB393K7iWyp5LN+5CGM++satwV1E8jTFbfwd1KwAAA4JJREFUWMOlmOuaojAMhstJjspRREAFGcbc/xXuNFaHtW0Ku+8vH4yhSfMlrYyk75I4qHy/Cuax2bF/4zBWng1LHD//3urFjSNQYh0PG9ycTyG8sUPPa5dLG5q1bgIQ1HEyfbspY6lbNvv8CoJqWuMnFta3UQpitw/EUk+9yU33zI0Xa1LRFxc0aB+0nwKtnJyy2VtodCRMstvTJGM0BQZYawsrxbCskhnpfW4ZaixdB9MoLUefA/tLGRf62bOVfAFHVekY14Ot5jvk0bnSc8xzxzZQ8hA8ZcwT20Rpc8F8yEIf1484kuR+VopJzqrH94vJ7Mb6JftcUTYJ/8b90JejKKwZFtijbFH9PL8uVs/tZHEdHPibWa4Z/rj53TGldNwQPrlLRg8e9XJBIZO4gEwql98i3ycAKJSli0THOHgtbq/cuUik1FZmOhBuOgzzBIgv21lYyK8ti2UDD5Dd255jy5K+/zwO8JOD5hItwLIojsKv8o0t97/j3ZzJDMCJzY5mLgqhskTVnq5haOUfKbNdRRvgk4IxdsX3qEjdj5yi2JXp9p4hXpiRPeg7foCCcwEgN/rZiVGr7K05yqSTykzXhrHyVEy4lsTc0FAHSK9eLu9vuHmmAXSVNCtVko+ZMgzyk/CT6Ax8gJq3pjAl/UykH7HiiHvzSD+u2LBRbxLwnlSbHOUgtEI74qG1VGgptiKyZrkPS5SlnjsgOI6IZF9Q1QfjltEisvj2j1jfWrJWaIygR/k3tERKMDpClc1Y3wVxbAekMJ2V7thpr3QiMYuGNO7Qkto2d/Ccmlb15dnaY2MfyQy9Ssz/EpsAjbH0RzF37PQ/HEWv358IRa48lVainkjdJsNtpjRU/7bYCuuAuuM4GZlqZ7E4R3fnMlV2tUxMrc+SmNQtI17UZkuxQKqNjMphK6pwMStrSms50y/Y+miDGmEmmvMV0kn3kUnfBcsibqhBnssKDjfe6l1PNcUv3NNhi5/UAhSHanw55Yb1RJrjSWlLd0KKg6U9DXxJg5mgsQnjM06MW292k83k6YT1uFzbeO7qHJQNkYYsAI7fkRfHGxrV/ZpDp99oVXozDyjkIAzr+az48vWPzaVjZu7v22eQT4e3HJri9Lp4OQlbR+LDG8+/DkHlW79PoiJjq2lODiixhwfbRrYfrE8vXpX07F/YTXlwrSPLii7+EN9JSf8BfoWmbPMPWtoAAAAASUVORK5CYII=);
+  background-size: 100%;
+  right: -40px;
+  top: 33px;
+}
+.order .order-form .cid-tip .tip {
+  top: 0;
+  position: absolute;
+  height: 0;
+  font-size: 12px;
+  width: 300px;
+  right: auto;
+  overflow: hidden;
+  z-index: 1;
+}
+.order .order-form .cid-tip .tip .img {
+  width: 100%;
+}
+.order .order-form .cid-tip:hover .tip {
+  height: 448px;
+  transition: 0.5s ease-in-out;
+}
+.order .order-form .order-tips {
+  font-size: 12px;
+  color: red;
+  margin-bottom: 24px;
+}
+.order .order-form .btn-submit {
+  max-width: 268px;
+}
+.order .spin-content {
+  border: 1px solid #91d5ff;
+  background-color: #e6f7ff;
+  padding: 30px;
+}
+@media (max-width: 850px) {
+  .order .order-form {
+    padding: 0 24px;
+    max-width: 640px;
+  }
+  .order .order-form > p,
+  .order .order-form label {
+    font-size: 14px;
+  }
+  .order .order-form .order-character-id {
+    display: flex;
+    align-items: center;
+  }
+  .order .order-form .order-character-id .ant-form-item {
+    flex-grow: 1;
+  }
+  .order .order-form .order-character-id .cid-tip {
+    position: relative;
+    margin: 0;
+    right: auto;
+    top: auto;
+    margin-left: 10px;
+    flex-shrink: 0;
+  }
+  .order .order-form .order-character-id .cid-tip .tip {
+    right: 0;
+    left: auto;
+  }
+  .order .order-form .btn-submit {
+    max-width: 640px;
+  }
+}
+#header,
+#header img {
+  width: 100%;
+}
+#footer {
+  max-width: 840px;
+  margin: 0 auto;
+  border-top: 1px dashed #6a6a6a;
+  padding: 60px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: wrap;
+}
+#footer .logo {
+  width: 300px;
+  margin-right: 55px;
+}
+#footer .text {
+  line-height: 16px;
+  white-space: nowrap;
+}
+#footer p {
+  margin: 0;
+}
+@media (max-width: 850px) {
+  #footer {
+    max-width: 640px;
+    padding: 24px 0;
+  }
+  #footer .logo {
+    margin-bottom: 14px;
+    margin-right: 0;
+  }
+  #footer .text {
+    width: 100%;
+  }
+  #footer p {
+    text-align: center;
+  }
+}
+
+/* ::-webkit-scrollbar {background-color: #fff;width: 10px;height: 10px;}
+table::-webkit-scrollbar {background-color: #fff;  }
+::-webkit-scrollbar-track {background-color: #ffffff;}
+::-webkit-scrollbar-thumb {background-color: #bdc3d7;}
+.ant-table-body,.ant-table-scroll,.ant-table-body-inner{scrollbar-color: #bdc3d7 #bdc3d7; scrollbar-width:thin;} */
