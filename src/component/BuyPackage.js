@@ -124,7 +124,7 @@ class BuyPackage extends React.Component {
                         ]}
                     >
                         <Select size="large" onChange={this.onChangeZoneID}>
-                            {zoneData.data.map(item => <Option value={item.regionid}>{item.nickname}</Option>)}
+                            {zoneData.data.map(item => <Option value={item.regionid}>{item.nickname} - {item.zonename}</Option>)}
                         </Select>
                     </Form.Item>
 
@@ -155,9 +155,9 @@ class BuyPackage extends React.Component {
                     >
                         <Select size="large" >
                             {charData.data.map(item => {
-                                // if(item.zoneid === this.state.zoneInfo.zoneid) {
+                                if(item.zoneid === this.state.zoneInfo.zoneid) {
                                     return <Option value={item.charid}>{`${item.name} [ID: ${item.charid}]`}</Option>
-                                // }
+                                }
                             })}
                         </Select>
                     </Form.Item>
