@@ -124,7 +124,7 @@ class BuyPackage extends React.Component {
                         ]}
                     >
                         <Select size="large" onChange={this.onChangeZoneID}>
-                            {zoneData.data.map(item => <Option value={item.regionid}>{item.zonename}</Option>)}
+                            {zoneData.data.map(item => <Option value={item.regionid}>{item.nickname}</Option>)}
                         </Select>
                     </Form.Item>
 
