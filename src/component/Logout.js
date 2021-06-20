@@ -6,6 +6,7 @@ import { Form, Input, Button, Spin  } from 'antd';
 import * as LoginActions from '../actions/LoginActions';
 import openNotification from '../constants/Notification';
 import MSG from '../constants/messages';
+import * as AccountActions from '../actions/AccountActions';
 
 class Login extends React.Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class Login extends React.Component {
 
     componentDidMount() {
         window.localStorage.setItem('account', null)
+        this.props.resetAccountInfo();
         this.props.history.push('login')
     }
 
@@ -36,7 +38,9 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    resetAccountInfo: () => {
+      dispatch(AccountActions.resetAccountInfo());
+    },
   };
 };
 

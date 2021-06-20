@@ -65,6 +65,15 @@ const account = (state = initialState, action) => {
                 status: true
             }
     };
+    case types.ACCOUNT_INFO_ERROR:
+        return {
+            ...state,
+            info: {
+                ...info,
+                data: ['error'],
+                status: true
+            }
+    };
     case types.ZONE_LIST:
         return {
             ...state,
@@ -145,6 +154,12 @@ const account = (state = initialState, action) => {
                 ...info,
                 status: false
             },
+    };
+
+    case types.RESET_ACCOUNT_INFO:
+        return {
+            ...state,
+            info: initialState.info,
     };
 
     case types.GET_LOGS:

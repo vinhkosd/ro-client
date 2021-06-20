@@ -10,6 +10,7 @@ export const getAccountInfo = () => {
       checkResponse(response);
       dispatch(setStatus(types.ACCOUNT_INFO, response.data));
     }).catch((error) => {
+      dispatch(setStatus(types.ACCOUNT_INFO_ERROR, error.message));
       if (error.response) {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
@@ -270,6 +271,10 @@ export const resetStatusAllList = () => {
 
 export const resetStatusAccountInfo = () => {
     return {type: types.RESET_STATUS_ACCOUNT_INFO};
+}
+
+export const resetAccountInfo = () => {
+    return {type: types.RESET_ACCOUNT_INFO};
 }
 
 export const resetStatusGetLogs = () => {

@@ -34,6 +34,9 @@ class AccountInfo extends React.Component {
         if(this.props.account_info.status) {
             this.setState({loading: false});
             this.props.resetStatusAccountInfo();
+            if(this.props.account_info.data[0] == 'error') {
+                this.props.history.push('logout');
+            }
         }
     }
 
