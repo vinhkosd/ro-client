@@ -155,9 +155,9 @@ class BuyPackage extends React.Component {
                     >
                         <Select size="large" >
                             {charData.data.map(item => {
-                                if(item.zoneid === this.state.zoneInfo.zoneid) {
+                                // if(item.zoneid === this.state.zoneInfo.zoneid) {
                                     return <Option value={item.charid}>{`${item.name} [ID: ${item.charid}]`}</Option>
-                                }
+                                // }
                             })}
                         </Select>
                     </Form.Item>
