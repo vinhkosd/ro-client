@@ -35,6 +35,8 @@ class ForgotPassword extends React.Component {
                 } else {
                     openNotification('error', resetPassData[1]);
                 }
+            } else if(resetPassData.errors) {
+                openNotification('error', MSG.validateErrors(resetPassData));
             } else {
                 if(resetPassData[1] == 'send_mail') {
                     openNotification('success', MSG.forgot_password.enter_code);

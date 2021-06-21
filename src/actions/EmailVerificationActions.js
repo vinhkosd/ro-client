@@ -18,6 +18,10 @@ export const forgotPassword = (params) => {
             const message = "not found";
             console.log('message', message);
           }
+
+          if (error.response.status == 422){
+            dispatch(setStatus(types.FORGOT_PASSWORD, error.response.data));
+          }
       } else if (error.request) {
           // The request was made but no response was received
           // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
@@ -47,6 +51,10 @@ export const changeEmail = (params) => {
           if (error.response.status == 404){
             const message = "not found";
             console.log('message', message);
+          }
+
+          if (error.response.status == 422){
+            dispatch(setStatus(types.CHANGE_EMAIL, error.response.data));
           }
       } else if (error.request) {
           // The request was made but no response was received

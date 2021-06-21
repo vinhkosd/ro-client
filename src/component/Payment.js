@@ -73,6 +73,8 @@ class Payment extends React.Component {
             this.props.resetProcessPaypalStatus();
             if(this.props.payment_info.data[0] == 'error') {
                 openNotification('error', MSG.payment[this.props.payment_info.data[1]]);
+            } else if(this.props.payment_info.data.errors) {
+                openNotification('error', MSG.validateErrors(this.props.payment_info.data));
             } else {
                 openNotification('success', MSG.payment.success);
             }

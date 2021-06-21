@@ -27,6 +27,8 @@ class ChangePassword extends React.Component {
             const changePassData = nextProps.account_change_password.data;
             if(changePassData[0] == 'error') {
                 openNotification('error', MSG.change_password[changePassData[1]]);
+            } else if(changePassData.errors) {
+                openNotification('error', MSG.validateErrors(changePassData));
             } else {
                 window.localStorage.setItem('account', JSON.stringify(changePassData[1]));
                 openNotification('success', MSG.change_password.success);

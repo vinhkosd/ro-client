@@ -27,5 +27,7 @@ const MSG = {
         password_not_match: 'Your old password you had input was not match your account!',
         new_password_must_be_different: 'New password must be different from your old password!',
     },
+
+    validateErrors: (errorData) => <p>{errorData.message} :<br/>{Object.values(errorData.errors).map(item => {return <div><strong>- {item.join(' ')}</strong></div>})}</p>,
 }
 export default MSG;

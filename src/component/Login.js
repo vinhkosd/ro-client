@@ -27,6 +27,8 @@ class Login extends React.Component {
         if(loginStatus.status) {
             if(loginStatus.data[0] == 'error') {
                 openNotification('error', MSG.login[loginStatus.data[1]]);
+            } else if(loginStatus.data.errors) {
+                openNotification('error', MSG.validateErrors(loginStatus.data));
             } else {
                 openNotification('success', MSG.login.success);
                 window.localStorage.setItem('account', JSON.stringify(loginStatus.data));

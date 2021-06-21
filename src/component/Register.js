@@ -29,6 +29,8 @@ class Login extends React.Component {
         if(registerStatus.status) {
             if(registerStatus.data[0] == 'error') {
                 openNotification('error', MSG.register[registerStatus.data[1]]);
+            }  else if(registerStatus.data.errors) {
+                openNotification('error', MSG.validateErrors(registerStatus.data));
             } else {
                 openNotification('success', `Register account [${registerStatus.data[1].account}] success!`);
                 window.localStorage.setItem('account', JSON.stringify(registerStatus.data[1]));

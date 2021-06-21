@@ -18,6 +18,11 @@ export const register = (params) => {
               const message = "not found";
               console.log('message', message);
             }
+
+            
+            if (error.response.status == 422){
+              dispatch(setStatus(types.REGISTER_STATUS, error.response.data));
+            }
         } else if (error.request) {
             // The request was made but no response was received
             // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
