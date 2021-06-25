@@ -13,11 +13,11 @@ function Footer() {
       <div id="footer">
         <img src="img/foot-logo.png" className="logo"/>
         <div className="text">
-          <p><a href="https://sea.ragnaroketernallove.com/terms-of-service" target="_blank"> Terms of services </a> | <a href="https://sea.ragnaroketernallove.com/privacy-policy" target="_blank"> Privacy Policy </a>
+          <p><a href="#"> Terms of services </a> | <a href="#"> Privacy Policy </a>
           </p>
-          <p>© 2018 Gravity Co., Ltd. All Rights Reserved.</p>
-          <p>© 2018 Gravity Interactive, Inc. All Rights Reserved.</p>
-          <p>© 2018 X.D. Global Ltd. All Rights Reserved.</p>
+          <p>© 2021 Ragnarok Trinity Mobile</p>
+          <p>© 2021 The new age of Ragnarok Mobile</p>
+          <p>© 2021 GBTEAM.</p>
         </div>
       </div>
     </React.Fragment>
