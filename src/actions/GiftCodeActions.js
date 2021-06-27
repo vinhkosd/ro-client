@@ -3,67 +3,6 @@ import APPCONFIG from '../constants/appConfig';
 import axios from '../constants/axios';
 import checkResponse from '../constants/checkResponse';
 
-export const getZoneList = () => {
-  return (dispatch) => {
-    return axios.get(`${APPCONFIG.apiUri}zone/getList`)
-    .then(response => {
-      checkResponse(response);
-      dispatch(setStatus(types.ZONE_LIST, response.data));
-    }).catch((error) => {
-      if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
-          // console.log(error.response.data);
-          // console.log(error.response.status);
-          // console.log(error.response.headers);
-          if (error.response.status == 404){
-            const message = "not found";
-            console.log('message', message);
-          }
-      } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
-          console.log(error.request);
-      } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Error', error.message);
-      }
-      console.log(error.config);
-    });
-  };
-};
-
-export const getCharList = () => {
-  return (dispatch) => {
-    return axios.get(`${APPCONFIG.apiUri}char/getList`)
-    .then(response => {
-      checkResponse(response);
-      dispatch(setStatus(types.CHAR_LIST, response.data));
-    }).catch((error) => {
-      if (error.response) {
-          // The request was made and the server responded with a status code
-          // that falls out of the range of 2xx
-          // console.log(error.response.data);
-          // console.log(error.response.status);
-          // console.log(error.response.headers);
-          if (error.response.status == 404){
-            const message = "not found";
-            console.log('message', message);
-          }
-      } else if (error.request) {
-          // The request was made but no response was received
-          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-          // http.ClientRequest in node.js
-          console.log(error.request);
-      } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Error', error.message);
-      }
-      console.log(error.config);
-    });
-  };
-};
 
 export const checkCode = (params) => {
   return (dispatch) => {

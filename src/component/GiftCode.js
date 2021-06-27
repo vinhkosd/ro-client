@@ -12,7 +12,7 @@ import * as GiftCodeActions from '../actions/GiftCodeActions';
 
 const {Option} = Select;
 
-class BuyPackage extends React.Component {
+class GiftCode extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -30,15 +30,13 @@ class BuyPackage extends React.Component {
 
         this.props.getZoneList();
         this.props.getCharList();
-        this.props.getDepositList();
-        this.props.getTypeDepositList();
     }
 
     onFinish = (values) => {
         this.setState({
             loading: true
         }, () => {
-            this.props.buyPackage(values);
+            this.props.checkCode(values);
         });
     };
     
@@ -64,9 +62,7 @@ class BuyPackage extends React.Component {
     componentDidUpdate(){
         const zoneData = this.props.account_zone;
         const charData = this.props.account_char;
-        const depositData = this.props.account_deposit;
-        const depositTypeData = this.props.account_deposit_type;
-        if(this.state.loading && zoneData.status && charData.status && depositData.status && depositTypeData.status) {
+        if(this.state.loading && zoneData.status && charData.status) {
             this.setState({
                 loading: false
             });
@@ -75,19 +71,19 @@ class BuyPackage extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.account_buy_package.status) {
-            let statusCode = nextProps.account_buy_package.data[0];
+        if(nextProps.check_code.status) {
+            let statusCode = nextProps.check_code.data[0];
             this.setState({
                 loading: false
             }, () => {
                 if(statusCode == 'success') {
-                    openNotification('success', 'Buy Package Success! Please check in-game mail.');
+                    openNotification('success', 'Receive GiftCode success! Please check in-game mail.');
                 } else {
-                    openNotification('error', nextProps.account_buy_package.data[1]);
+                    openNotification('error', nextProps.check_code.data[1]);
                 }
                 this.props.getAccountInfo();//reload money
                 this.props.getLogs();
-                this.props.resetBuyPackageStatus();
+                this.props.resetCheckCodeStatus();
                 this.props.form.resetFields();
             });
         }
@@ -96,12 +92,10 @@ class BuyPackage extends React.Component {
     render() {
         const zoneData = this.props.account_zone;
         const charData = this.props.account_char;
-        const depositData = this.props.account_deposit;
-        const depositTypeData = this.props.account_deposit_type;
 
         return (
             <div className="order">
-                <div className="payment-type"> Buy Package </div>
+                <div className="payment-type"> GiftCode </div>
                 <Spin size="large" spinning={this.state.loading}>
                 
                 <Form
@@ -131,21 +125,6 @@ class BuyPackage extends React.Component {
                     </Form.Item>
 
                     <Form.Item
-                        label="Select in-game currency:"
-                        name="currency"
-                        rules={[
-                        {
-                            required: true,
-                            message: 'Please choose in-game currency!',
-                        },
-                        ]}
-                    >
-                        <Select size="large" onChange={this.onChangeCurrency}>
-                            {depositTypeData.data.map(item => <Option value={item.Type}>{item.Title}</Option>)}
-                        </Select>
-                    </Form.Item>
-
-                    <Form.Item
                         label="Character ID:"
                         name="charid"
                         rules={[
@@ -165,28 +144,22 @@ class BuyPackage extends React.Component {
                     </Form.Item>
                     
                     <Form.Item
-                        label="Amount:"
-                        name="amount"
+                        label="GiftCode:"
+                        name="code"
                         rules={[
                         {
                             required: true,
-                            message: 'Please choose amount!',
+                            message: 'Please input code!',
                         },
                         ]}
                     >
-                        <Select size="large" >
-                            {depositData.data.map(item => {
-                                if((item.Type==4 ? 3 : item.Type) == this.state.currency) {
-                                    return <Option value={item.id}>{`${item.Price} USD ${item.Title}`}</Option>;
-                                }
-                            })}
-                        </Select>
+                         <Input size="large" placeholder="Enter GiftCode" />
                     </Form.Item>
 
                     
                     <Form.Item>
                         <Button type="danger" htmlType="submit" className="ant-btn-block">
-                            Buy Package
+                            Submit
                         </Button>
                     </Form.Item>
                 </Form>
@@ -199,9 +172,7 @@ class BuyPackage extends React.Component {
 const mapStateToProps = (state, ownProps) => ({
     account_char: state.account.char,
     account_zone: state.account.zone,
-    account_deposit: state.account.deposit,
-    account_deposit_type: state.account.deposit_type,
-    account_buy_package: state.account.buy_package,
+    check_code: state.giftcode.check_code,
 });
 
 const mapDispatchToProps = dispatch => {
@@ -212,17 +183,11 @@ const mapDispatchToProps = dispatch => {
     getCharList: () => {
         dispatch(AccountActions.getCharList());
     },
-    getDepositList: () => {
-        dispatch(AccountActions.getDepositList());
+    checkCode: (params) => {
+        dispatch(GiftCodeActions.checkCode(params));
     },
-    getTypeDepositList: () => {
-        dispatch(AccountActions.getTypeDepositList());
-    },
-    buyPackage: (params) => {
-        dispatch(AccountActions.buyPackage(params));
-    },
-    resetBuyPackageStatus: () => {
-        dispatch(AccountActions.resetBuyPackageStatus());
+    resetCheckCodeStatus: () => {
+        dispatch(GiftCodeActions.resetCheckCodeStatus());
     },
     getAccountInfo: () => {
         dispatch(AccountActions.getAccountInfo());
@@ -238,4 +203,4 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(
   mapStateToProps,mapDispatchToProps
-)(withRouter(BuyPackage));
+)(withRouter(GiftCode));

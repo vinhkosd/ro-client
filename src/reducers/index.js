@@ -5,6 +5,7 @@ import loginReducer from './loginReducer';
 import registerReducer from './registerReducer';
 import accountReducer from './accountReducer';
 import paymentReducer from './paymentReducer';
+import giftCodeReducer from './giftCodeReducer';
 
 const rootReducer = combineReducers({
     routing: routerReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     register: registerReducer,
     account: accountReducer,
     payment: paymentReducer,
+    giftcode: giftCodeReducer,
 });
 
 export default rootReducer;

@@ -7,6 +7,7 @@ import { LogoutOutlined } from '@ant-design/icons';
 import Payment from './Payment';
 import AccountInfo from './AccountInfo';
 import BuyPackage from './BuyPackage';
+import GiftCode from './GiftCode';
 import AccountLogs from './AccountLogs';
 import WithFormHOC from '../constants/withFormHOC';
 import ChangeEmail from './ChangeEmail';
@@ -46,6 +47,9 @@ class Service extends React.Component {
                     </TabPane>
                     <TabPane tab="Buy Package" key="buypackage">
                         <WithFormHOC Component={BuyPackage} props={this.props}/>
+                    </TabPane>
+                     <TabPane tab="GiftCode" key="giftcode">
+                        <WithFormHOC Component={GiftCode} props={this.props}/>
                     </TabPane>
                     <TabPane tab="Account Logs" key="accountlogs">
                         <AccountLogs/>
