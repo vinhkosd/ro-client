@@ -36,6 +36,9 @@ class GiftCode extends React.Component {
         this.setState({
             loading: true
         }, () => {
+            const zoneData = this.props.account_zone.data;
+            const zoneInfo = zoneData.find(item => item.zoneid == values.serverid);
+            values.serverid = zoneInfo.regionid;
             this.props.checkCode(values);
         });
     };
@@ -51,9 +54,9 @@ class GiftCode extends React.Component {
         });
     }
 
-    onChangeZoneID = (regionid) => {
+    onChangeZoneID = (zoneid) => {
         const zoneData = this.props.account_zone.data;
-        this.setState({zoneInfo: zoneData.find(item => item.regionid == regionid)});
+        this.setState({zoneInfo: zoneData.find(item => item.zoneid == zoneid)});
         this.props.form.setFieldsValue({
             charid: null
         });
@@ -67,6 +70,7 @@ class GiftCode extends React.Component {
                 loading: false
             });
             this.props.resetStatusAllList();
+            this.props.form.resetFields();
         }
     }
 
@@ -78,7 +82,9 @@ class GiftCode extends React.Component {
             }, () => {
                 if(statusCode == 'success') {
                     openNotification('success', 'Receive GiftCode success! Please check in-game mail.');
-                } else {
+                }   else if(nextProps.check_code.data.errors) {
+                    openNotification('error', MSG.validateErrors(nextProps.check_code.data));
+                }  else {
                     openNotification('error', nextProps.check_code.data[1]);
                 }
                 this.props.getAccountInfo();//reload money
@@ -102,6 +108,7 @@ class GiftCode extends React.Component {
                     name="basic"
                     initialValues={{
                         // remember: true,
+                        serverid: zoneData.data && Object.keys(zoneData.data).length > 0 ? zoneData.data[0].zoneid : []
                     }}
                     onFinish={this.onFinish}
                     onFinishFailed={this.onFinishFailed}
@@ -120,7 +127,7 @@ class GiftCode extends React.Component {
                         ]}
                     >
                         <Select size="large" onChange={this.onChangeZoneID}>
-                            {zoneData.data.map(item => <Option value={item.regionid}>{item.nickname} - {item.zonename}</Option>)}
+                            {zoneData.data.map(item => <Option value={item.zoneid} key={`${item.regionid}-${item.zonename}`}>{item.nickname} - {item.zonename}</Option>)}
                         </Select>
                     </Form.Item>
 
