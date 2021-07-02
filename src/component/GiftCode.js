@@ -36,9 +36,6 @@ class GiftCode extends React.Component {
         this.setState({
             loading: true
         }, () => {
-            const zoneData = this.props.account_zone.data;
-            const zoneInfo = zoneData.find(item => item.zoneid == values.serverid);
-            values.serverid = zoneInfo.regionid;
             this.props.checkCode(values);
         });
     };
@@ -108,7 +105,7 @@ class GiftCode extends React.Component {
                     name="basic"
                     initialValues={{
                         // remember: true,
-                        serverid: zoneData.data && Object.keys(zoneData.data).length > 0 ? zoneData.data[0].zoneid : []
+                        serverid: zoneData.data && Object.keys(zoneData.data).length > 0 ? zoneData.data[0].regionid : null
                     }}
                     onFinish={this.onFinish}
                     onFinishFailed={this.onFinishFailed}
@@ -127,7 +124,7 @@ class GiftCode extends React.Component {
                         ]}
                     >
                         <Select size="large" onChange={this.onChangeZoneID}>
-                            {zoneData.data.map(item => <Option value={item.zoneid} key={`${item.regionid}-${item.zonename}`}>{item.nickname} - {item.zonename}</Option>)}
+                            {zoneData.data.map(item => <Option value={item.regionid} key={`${item.regionid}-${item.zonename}`}>{item.nickname}</Option>)}
                         </Select>
                     </Form.Item>
 

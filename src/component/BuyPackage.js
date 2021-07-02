@@ -69,6 +69,7 @@ class BuyPackage extends React.Component {
                 loading: false
             });
             this.props.resetStatusAllList();
+            this.props.form.resetFields();
         }
     }
 
@@ -106,6 +107,7 @@ class BuyPackage extends React.Component {
                     name="basic"
                     initialValues={{
                         // remember: true,
+                        serverid: zoneData.data && Object.keys(zoneData.data).length > 0 ? zoneData.data[0].regionid : null
                     }}
                     onFinish={this.onFinish}
                     onFinishFailed={this.onFinishFailed}
@@ -124,7 +126,7 @@ class BuyPackage extends React.Component {
                         ]}
                     >
                         <Select size="large" onChange={this.onChangeZoneID}>
-                            {zoneData.data.map(item => <Option value={item.regionid}>{item.nickname} - {item.zonename}</Option>)}
+                            {zoneData.data.map(item => <Option value={item.regionid}>{item.nickname}</Option>)}
                         </Select>
                     </Form.Item>
 
