@@ -55,6 +55,15 @@
   height: 40px;
   margin-right: 10px;
 }
+.banner .logo {
+    border: 1px solid #bebebe;
+    margin: 0 5px;
+    width: 58px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
 .banner .text {
   color: #505050;
   font-size: 14px;

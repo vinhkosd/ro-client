@@ -12,6 +12,7 @@ import AccountLogs from './AccountLogs';
 import WithFormHOC from '../constants/withFormHOC';
 import ChangeEmail from './ChangeEmail';
 import ChangePassword from './ChangePassword';
+import PaymentMenu from './PaymentMenu';
 
 const { TabPane } = Tabs;
 
@@ -31,7 +32,6 @@ class Service extends React.Component {
     }
 
     changeTabs = (activeKey) => {
-        console.log(activeKey);
         this.setState({activeKey});
     }
 
@@ -43,7 +43,7 @@ class Service extends React.Component {
                         <AccountInfo changeTabs={this.changeTabs}/>
                     </TabPane>
                     <TabPane tab="Payment" key="payment">
-                        <WithFormHOC Component={Payment} props={this.props}/>
+                        <WithFormHOC Component={PaymentMenu} props={this.props}/>
                     </TabPane>
                     <TabPane tab="Buy Package" key="buypackage">
                         <WithFormHOC Component={BuyPackage} props={this.props}/>

@@ -5,13 +5,16 @@ import { Form, Spin, Input, Button, Select, InputNumber } from 'antd';
 import { withRouter } from "react-router-dom";
 import openNotification from '../constants/Notification';
 import MSG from '../constants/messages';
+import appConfig from '../constants/appConfig';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from '../constants/captchaEngine';
 import * as AccountActions from '../actions/AccountActions';
 import WithFormHOC from '../constants/withFormHOC';
 import ChangeEmail from './ChangeEmail';
 import ChangePassword from './ChangePassword';
-
+import io from 'socket.io-client';
 const {Option} = Select;
+
+const socket = io(appConfig.socketUrl);
 
 class AccountInfo extends React.Component {
     constructor(props) {
@@ -28,6 +31,11 @@ class AccountInfo extends React.Component {
             this.props.history.push('login')
         }
         this.props.getAccountInfo();
+        socket.on('connect', function() {//join room mỗi khi connect vào socket
+          socket.emit('join-room', `reload-account-info-${accountInfo.account}`);
+        });
+        
+        socket.on('reload-account-info', this.reloadAccountInfo);
     }
 
     componentDidUpdate() {
@@ -37,6 +45,14 @@ class AccountInfo extends React.Component {
             if(this.props.account_info.data[0] == 'error') {
                 this.props.history.push('logout');
             }
+        }
+    }
+    
+    reloadAccountInfo = (data) => {
+        const accountInfo = JSON.parse(window.localStorage.getItem('account'));
+        if(accountInfo.account == data.account) {
+            this.props.getAccountInfo();
+            this.props.getLogs();
         }
     }
 
@@ -188,6 +204,9 @@ const mapDispatchToProps = dispatch => {
     },
     resetStatusAccountInfo: () => {
         dispatch(AccountActions.resetStatusAccountInfo());
+    },
+    getLogs: () => {
+        dispatch(AccountActions.getLogs());
     },
   };
 };

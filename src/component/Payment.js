@@ -156,6 +156,9 @@ class Payment extends React.Component {
                         </div>
                         
                         <div id="paypal-button" style={{display: (!isNaN(this.props.form.getFieldValue('payAmount')) && this.props.form.getFieldValue('payAmount') > 0 && validateCaptcha(this.props.form.getFieldValue('captcha'), false))? 'block': 'none'}}></div>
+                        <Button type="primary" onClick={() => this.props.changePage('choosemethod')} className="ant-btn-block">
+                            Back
+                        </Button>
                     </Form>
                 </Spin>
             </div>

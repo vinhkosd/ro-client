@@ -9,11 +9,16 @@ const initialState = {
         data: [],
         status: false
     },
+    charge_config: {
+        data: [],
+        status: false
+    },
 };
 
 const payment = (state = initialState, action) => {
   let info = state.info;
-  let config = state.zone;
+  let config = state.config;
+  let charge_config = state.charge_config;
   
   switch (action.type) {
     case types.PAYMENT_STATUS:
@@ -50,6 +55,25 @@ const payment = (state = initialState, action) => {
             ...state,
             config: {
                 ...config,
+                status: false
+            },
+    };
+    
+    case types.CHARGE_CONFIG:
+        return {
+            ...state,
+            charge_config: {
+                ...charge_config,
+                data: action.payload.data,
+                status: true
+            }
+    };
+    
+    case types.RESET_STATUS_CHARGE_CONFIG:
+        return {
+            ...state,
+            charge_config: {
+                ...charge_config,
                 status: false
             },
     };
