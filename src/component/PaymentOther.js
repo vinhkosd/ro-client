@@ -191,7 +191,7 @@ class Payment extends React.Component {
                                     isRenderFormItem = false;
                                     break;
                                 case "InfoBox":
-                                    componentItem = <Card title={configData.label} >{ReactHtmlParser(this.urlify(configData.placeholder))}</Card>;
+                                    componentItem = <Card title={`${configData.label} (${currentCurrency.he_so_quy_doi} ${currentCurrency.currency} = 1 USD)`} >{ReactHtmlParser(this.urlify(configData.placeholder))}</Card>;
                                     isRenderFormItem = false;
                                     break;
                             }
