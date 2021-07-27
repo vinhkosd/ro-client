@@ -78,17 +78,6 @@ class AccountInfo extends React.Component {
                                 <div className="col-md-12 col-xs-12">
                                     <div className="row">
                                         <form id="userform" className="col-md-12 col-xs-12">
-                                            
-                                            <div className="form-group basic animated">
-                                                <div className="input-wrapper">
-                                                    <div className="row">
-                                                        <div className="col-md-3 col-xs-12">Account ID</div>
-                                                        <div className="col-md-9 col-xs-12">
-                                                            <Input value={account_data.id? account_data.id : ''} className="form-control" disabled={true}/>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div className="form-group basic animated">
                                                 <div className="input-wrapper">
                                                     <div className="row">
@@ -119,7 +108,7 @@ class AccountInfo extends React.Component {
                                                         <div className="col-md-7 col-xs-12">
                                                         <InputNumber
                                                             className="form-control"
-                                                            formatter={value => `${value}.00 USD`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                                                            formatter={value => `${parseFloat(`${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')).toFixed(2)} USD`}
                                                             parser={value => value.replace(/\$\s?|(,*)/g, '')}
                                                             disabled={true}
                                                             style={{ width: '100%' }}

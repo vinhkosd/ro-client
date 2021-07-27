@@ -26,7 +26,7 @@ class Login extends React.Component {
         const loginStatus = nextProps.login_status;
         if(loginStatus.status) {
             if(loginStatus.data[0] == 'error') {
-                openNotification('error', MSG.login[loginStatus.data[1]]);
+                openNotification('error', MSG.login[loginStatus.data[1]] ? MSG.login[loginStatus.data[1]] : loginStatus.data[1]);
             } else if(loginStatus.data.errors) {
                 openNotification('error', MSG.validateErrors(loginStatus.data));
             } else {

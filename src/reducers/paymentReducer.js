@@ -13,12 +13,17 @@ const initialState = {
         data: [],
         status: false
     },
+    list_currency: {
+        data: [],
+        status: false
+    },
 };
 
 const payment = (state = initialState, action) => {
   let info = state.info;
   let config = state.config;
   let charge_config = state.charge_config;
+  let list_currency = state.list_currency;
   
   switch (action.type) {
     case types.PAYMENT_STATUS:
@@ -74,6 +79,25 @@ const payment = (state = initialState, action) => {
             ...state,
             charge_config: {
                 ...charge_config,
+                status: false
+            },
+    };
+    
+    case types.LIST_CURRENCY:
+        return {
+            ...state,
+            list_currency: {
+                ...list_currency,
+                data: action.payload.data,
+                status: true
+            }
+    };
+    
+    case types.RESET_STATUS_LIST_CURRENCY:
+        return {
+            ...state,
+            list_currency: {
+                ...list_currency,
                 status: false
             },
     };

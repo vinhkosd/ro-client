@@ -28,7 +28,7 @@ class Login extends React.Component {
         const registerStatus = nextProps.register_status;
         if(registerStatus.status) {
             if(registerStatus.data[0] == 'error') {
-                openNotification('error', MSG.register[registerStatus.data[1]]);
+                openNotification('error', MSG.register[registerStatus.data[1]] ? MSG.register[registerStatus.data[1]] : registerStatus.data[1]);
             }  else if(registerStatus.data.errors) {
                 openNotification('error', MSG.validateErrors(registerStatus.data));
             } else {

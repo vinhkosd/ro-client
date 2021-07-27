@@ -32,6 +32,7 @@ class Payment extends React.Component {
             list_component: this.props.chargeConfigInfo.component_config ? JSON.parse(this.props.chargeConfigInfo.list_component) : [],
         };
         this.setState({chargeConfigInfo});
+        this.props.form.resetFields();
     }
 
     componentDidUpdate() {
@@ -47,6 +48,7 @@ class Payment extends React.Component {
             }
             this.props.getAccountInfo();//reload money
             this.props.getLogs();
+            this.props.form.resetFields();
         }
     }
     
@@ -67,10 +69,39 @@ class Payment extends React.Component {
     onFinishFailed = (errorInfo) => {
         // console.log('Failed:', errorInfo);
     };
+    
+    urlify = (text) => {
+      var urlRegex = /(https?:\/\/[^\s]+)/g;
+      return text.replace(urlRegex, (url) => {
+        return '<a href="' + url + '" target="_blank">' + url + '</a>';
+      })
+      // or alternatively
+    }
 
-
+    onChangeAmount = (e) => {
+        const amount = e;
+        const currency = this.props.form.getFieldValue('currency');
+        const currentCurrency = this.props.list_currency && this.props.list_currency.data ? this.props.list_currency.data.find(item => item.id == currency) : null;
+        const toUSD = parseFloat(amount / (currentCurrency.he_so_quy_doi ? currentCurrency.he_so_quy_doi : 1)).toFixed(2);
+        
+        this.props.form.setFieldsValue({
+            tousd: toUSD
+        });
+    }
+    onChangeCurrency = (e) => {
+        const amount = this.props.form.getFieldValue('amount');
+        const currency = e;
+        const currentCurrency = this.props.list_currency && this.props.list_currency.data ? this.props.list_currency.data.find(item => item.id == currency) : null;
+        const toUSD = parseFloat(amount / (currentCurrency.he_so_quy_doi ? currentCurrency.he_so_quy_doi : 1)).toFixed(2);
+        
+        this.props.form.setFieldsValue({
+            tousd: toUSD
+        });
+    }
+    
     render() {
         var paymentConfig = this.state.chargeConfigInfo ? this.state.chargeConfigInfo : [];
+        const currentCurrency = this.props.list_currency && this.props.list_currency.data ? this.props.list_currency.data.find(item => item.default_region == this.props.chargeConfigInfo.region) : null;
         return (
             <div className="order">
                 <div className="payment-type"><a href="/" className="router-link-active">Payment Type</a>: {this.state.chargeConfigInfo.charge_title} - {this.state.chargeConfigInfo.region} </div>
@@ -79,7 +110,7 @@ class Payment extends React.Component {
                 <Form
                         name="basic"
                         initialValues={{
-                            // remember: true,
+                            currency: currentCurrency ? currentCurrency.id : null,
                         }}
                         onFinish={this.onFinish}
                         onFinishFailed={this.onFinishFailed}
@@ -160,7 +191,7 @@ class Payment extends React.Component {
                                     isRenderFormItem = false;
                                     break;
                                 case "InfoBox":
-                                    componentItem = <Card title={configData.label} >{ReactHtmlParser(configData.placeholder)}</Card>;
+                                    componentItem = <Card title={configData.label} >{ReactHtmlParser(this.urlify(configData.placeholder))}</Card>;
                                     isRenderFormItem = false;
                                     break;
                             }
@@ -179,6 +210,22 @@ class Payment extends React.Component {
 
                         })}
                         <Form.Item
+                            label="Choose Currency:"
+                            name="currency"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: `Please choose currency !`,
+                                },
+                            ]}
+                        >
+                            <Select size="large" onChange={this.onChangeCurrency} disabled readonly>
+                            {this.props.list_currency.data.map(item => {
+                                return <Option value={item.id}>{`${item.currency}`}</Option>
+                            })}
+                        </Select>
+                        </Form.Item>
+                        <Form.Item
                             label="Amount:"
                             name="amount"
                             rules={[
@@ -189,11 +236,27 @@ class Payment extends React.Component {
                             ]}
                         >
                             <InputNumber
-                                formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',').replace(/\./g, '')}
+                                formatter={value => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',').replace(/\./g, '')}
                                 parser={value => value.replace(/\$\s?|(,*)/g, '').replace(/\./g, '')}
                                 style={{ width: '100%' }}
                                 size="large"
                                 placeholder={'Enter amount you want to recharge'}
+                                onChange={this.onChangeAmount}
+                            />
+                        </Form.Item>
+                        
+                        <Form.Item
+                            label="Equivalent to USD:"
+                            name="tousd"
+                        >
+                            <InputNumber
+                                formatter={value => `$ ${value}`}
+                                parser={value => value.replace(/\$\s/g, '')}
+                                style={{ width: '100%' }}
+                                size="large"
+                                placeholder={'Equivalent to USD'}
+                                readonly
+                                disabled
                             />
                         </Form.Item>
                         
@@ -219,7 +282,8 @@ class Payment extends React.Component {
 
 const mapStateToProps = (state, ownProps) => ({
     payment_config: state.payment.config,
-    payment_info: state.payment.info
+    payment_info: state.payment.info,
+    list_currency: state.payment.list_currency
 });
 
 const mapDispatchToProps = dispatch => {

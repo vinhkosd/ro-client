@@ -146,7 +146,7 @@ class BuyPackage extends React.Component {
                     </Form.Item>
 
                     <Form.Item
-                        label="Character ID:"
+                        label="Choose Character:"
                         name="charid"
                         rules={[
                         {
@@ -158,7 +158,7 @@ class BuyPackage extends React.Component {
                         <Select size="large" >
                             {charData.data.map(item => {
                                 if(true) {
-                                    return <Option value={item.charid}>{`${item.name} [ID: ${item.charid}]`}</Option>
+                                    return <Option value={item.charid}>{`${item.name}`}</Option>
                                 }
                             })}
                         </Select>

@@ -1,7 +1,7 @@
 // import './layout.css';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Tabs, Spin } from 'antd';
+import { Tabs, Spin, Button } from 'antd';
 import { withRouter } from "react-router-dom";
 import Payment from './Payment';
 import PaymentOther from './PaymentOther';
@@ -28,13 +28,16 @@ class PaymentMenu extends React.Component {
             this.props.history.push('login')
         }
         this.props.getChargeConfig();
+        this.props.listCurrency();
     }
     
     componentDidUpdate() {
-        if(this.props.payment_charge_config.status) {
+        if(this.props.payment_charge_config.status && this.props.list_currency.status) {
           this.props.resetStatusChargeConfig();
+          this.props.resetStatusListCurrency();
           this.setState({loading: false})
         }
+        
     }
     
     changePage = (activePage) => {
@@ -78,11 +81,9 @@ class PaymentMenu extends React.Component {
       				  });
     				  })}
     				  
-              {this.state.activeSubPage != '' && <a className="banner" onClick={() => {
-      				      this.changeSubPage("");
-      				    }}>
-        					<span className="text">Back</span>
-  				    </a>}
+              {this.state.activeSubPage != '' && <Button style={{marginTop: '24px', marginRight:'48px'}} type="primary" onClick={() => this.changeSubPage("")} className="ant-btn-block">
+                            Back
+                        </Button>}
       			</div>
       		</div>}
       		
@@ -102,7 +103,8 @@ class PaymentMenu extends React.Component {
 // const WrappedPayment = antdForm.create()(withRouter(Payment));
 
 const mapStateToProps = (state, ownProps) => ({
-    payment_charge_config: state.payment.charge_config
+    payment_charge_config: state.payment.charge_config,
+    list_currency: state.payment.list_currency
 });
 
 const mapDispatchToProps = dispatch => {
@@ -121,6 +123,12 @@ const mapDispatchToProps = dispatch => {
         },
         getLogs: () => {
             dispatch(AccountActions.getLogs());
+        },
+        listCurrency: () => {
+            dispatch(PaymentActions.listCurrency());
+        },
+        resetStatusListCurrency: () => {
+            dispatch(PaymentActions.resetStatusListCurrency());
         },
     };
 };
