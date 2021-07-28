@@ -2,6 +2,7 @@ const MSG = {
     login: {
         wrong_account_or_password: 'Username/Email or Password was wrong!',
         success: 'Login success',
+        account_baned: 'Your account has been baned! Please contact Game Manager!',
     },
     register:
     {

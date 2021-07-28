@@ -252,7 +252,7 @@ class Payment extends React.Component {
                             <InputNumber
                                 formatter={value => `$ ${value}`}
                                 parser={value => value.replace(/\$\s/g, '')}
-                                style={{ width: '100%' }}
+                                style={{ width: '100%', color: 'rgb(0 0 0)' }}
                                 size="large"
                                 placeholder={'Equivalent to USD'}
                                 readonly

@@ -28,7 +28,8 @@ class AccountInfo extends React.Component {
     componentDidMount() {
         const accountInfo = JSON.parse(window.localStorage.getItem('account'));
         if(!accountInfo) {//user not login
-            this.props.history.push('login')
+            this.props.history.push('login');
+            return;
         }
         this.props.getAccountInfo();
         socket.on('connect', function() {//join room mỗi khi connect vào socket
@@ -108,7 +109,7 @@ class AccountInfo extends React.Component {
                                                         <div className="col-md-7 col-xs-12">
                                                         <InputNumber
                                                             className="form-control"
-                                                            formatter={value => `${parseFloat(`${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')).toFixed(2)} USD`}
+                                                            formatter={value => `${parseFloat(`${value}`).toFixed(2)} USD`}
                                                             parser={value => value.replace(/\$\s?|(,*)/g, '')}
                                                             disabled={true}
                                                             style={{ width: '100%' }}
