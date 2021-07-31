@@ -2,7 +2,7 @@
 ### `npm install`
 
 tạo file config
-### `cp .env.example .env`
+### `sudo cp -rf .env.example .env`
 
 ## Lệnh cơ bản
 
