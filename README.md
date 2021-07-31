@@ -1,6 +1,8 @@
 # Cài đặt môi trường node modules để làm việc
-
 ### `npm install`
+
+tạo file config
+### `cp .env.example .env`
 
 ## Lệnh cơ bản
 
