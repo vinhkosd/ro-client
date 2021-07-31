@@ -1,3 +1,5 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
 const MSG = {
     login: {
         wrong_account_or_password: 'Username/Email or Password was wrong!',

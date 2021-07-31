@@ -71,11 +71,15 @@ class Payment extends React.Component {
     };
     
     urlify = (text) => {
+        const accountInfo = JSON.parse(window.localStorage.getItem('account'));
       var urlRegex = /(https?:\/\/[^\s]+)/g;
-      return text.replace(urlRegex, (url) => {
+      var returnText = '';
+      returnText = text.replace(urlRegex, (url) => {
         return '<a href="' + url + '" target="_blank">' + url + '</a>';
-      })
-      // or alternatively
+      });
+      returnText = returnText.replace('{{account}}', accountInfo.account);
+      returnText = returnText.replace('{{accountid}}', accountInfo.id);
+      return returnText;
     }
 
     onChangeAmount = (e) => {
