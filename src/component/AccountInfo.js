@@ -46,6 +46,9 @@ class AccountInfo extends React.Component {
             if(this.props.account_info.data[0] == 'error') {
                 this.props.history.push('logout');
             }
+            
+            socket.emit('join-room', `reload-account-info-${this.props.account_info.data.account}`);
+            socket.on('reload-account-info', this.reloadAccountInfo);
         }
     }
     
